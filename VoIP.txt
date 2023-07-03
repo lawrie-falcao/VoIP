@@ -1,0 +1,44 @@
+sudo apt-get install asterisk (Debian 11)
+
+nano /etc/asterisk/sip.conf
+
+[general]
+context=default
+allowguest=no
+srvlookup=yes
+
+[phone1]
+type=friend
+username=phone1
+secret=password1
+host=dynamic
+context=internal
+
+[phone2]
+type=friend
+username=phone2
+secret=password2
+host=dynamic
+context=internal
+
+nano /etc/asterisk/extensions.conf
+
+[internal]
+exten => 100,1,Dial(SIP/phone1)
+exten => 101,1,Dial(SIP/phone2)
+
+sudo systemctl restart asterisk
+
+ip a IPv4 10.10.3.138
+
+Linphone (Android)
+
+SIP Account 
+Username : phone1
+Password : password1
+Domain : 10.10.3.138
+Name : x
+Transport : UDP
+Phone : 100
+
+
